@@ -1,0 +1,501 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="ULUG'BEK.R Password Generator"
+    >
+
+    <title>🔐 Password Generator | ULUG'BEK.R</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==================================================
+         HEADER
+    =================================================== -->
+
+    <header class="top-header">
+
+        <div class="logo">
+            🔐 Password Generator
+        </div>
+
+        <div class="header-actions">
+
+            <button
+                id="themeBtn"
+                class="icon-btn"
+                title="Dark / Light"
+            >
+                🌙
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================================================
+         MAIN
+    =================================================== -->
+
+    <main class="container">
+
+        <!-- ==============================================
+             PASSWORD GENERATOR
+        =============================================== -->
+
+        <section
+            id="generatorSection"
+            class="app-card"
+        >
+
+            <div class="section-title">
+
+                <span>🔐</span>
+
+                <div>
+                    <h1>Password Generator</h1>
+
+                    <p>
+                        Kuchli va tasodifiy parol yarating
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD DISPLAY -->
+
+            <div class="password-box">
+
+                <input
+                    type="password"
+                    id="passwordOutput"
+                    placeholder="Parolingiz shu yerda chiqadi..."
+                    readonly
+                >
+
+                <button
+                    id="showPasswordBtn"
+                    class="small-btn"
+                    title="Parolni ko‘rsatish"
+                >
+                    👁️
+                </button>
+
+                <button
+                    id="copyPasswordBtn"
+                    class="small-btn"
+                    title="Nusxalash"
+                >
+                    📋
+                </button>
+
+            </div>
+
+
+            <!-- PASSWORD STRENGTH -->
+
+            <div class="strength-container">
+
+                <div class="strength-header">
+
+                    <span>
+                        📊 Parol kuchi
+                    </span>
+
+                    <strong id="strengthText">
+                        Weak
+                    </strong>
+
+                </div>
+
+                <div class="strength-bar">
+
+                    <div
+                        id="strengthBar"
+                        class="strength-progress"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LENGTH -->
+
+            <div class="setting-block">
+
+                <div class="setting-title">
+
+                    <label for="lengthRange">
+                        🔢 Parol uzunligi
+                    </label>
+
+                    <span id="lengthValue">
+                        12
+                    </span>
+
+                </div>
+
+                <input
+                    type="range"
+                    id="lengthRange"
+                    min="4"
+                    max="50"
+                    value="12"
+                >
+
+                <div class="range-labels">
+
+                    <span>4</span>
+                    <span>50</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- OPTIONS -->
+
+            <div class="options-grid">
+
+                <label class="option">
+
+                    <input
+                        type="checkbox"
+                        id="uppercase"
+                        checked
+                    >
+
+                    <span class="checkmark"></span>
+
+                    <span>
+                        🔠 Katta harflar
+                    </span>
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="checkbox"
+                        id="lowercase"
+                        checked
+                    >
+
+                    <span class="checkmark"></span>
+
+                    <span>
+                        🔡 Kichik harflar
+                    </span>
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="checkbox"
+                        id="numbers"
+                        checked
+                    >
+
+                    <span class="checkmark"></span>
+
+                    <span>
+                        🔢 Raqamlar
+                    </span>
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="checkbox"
+                        id="symbols"
+                        checked
+                    >
+
+                    <span class="checkmark"></span>
+
+                    <span>
+                        🔣 Maxsus belgilar
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <!-- GENERATE -->
+
+            <button
+                id="generateBtn"
+                class="primary-btn"
+            >
+                🎲 PAROL YARATISH
+            </button>
+
+
+            <button
+                id="newPasswordBtn"
+                class="secondary-btn"
+            >
+                🔄 Yangi parol
+            </button>
+
+        </section>
+
+
+        <!-- ==============================================
+             PASSWORD HISTORY
+        =============================================== -->
+
+        <section
+            id="historySection"
+            class="app-card"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        📜 Parol tarixi
+                    </h2>
+
+                    <p>
+                        Yaratilgan parollar
+                    </p>
+
+                </div>
+
+                <button
+                    id="clearHistoryBtn"
+                    class="danger-btn"
+                >
+                    🗑️ Tozalash
+                </button>
+
+            </div>
+
+
+            <div
+                id="historyList"
+                class="history-list"
+            >
+
+                <div class="empty-history">
+                    📭 Hozircha parol tarixi yo‘q
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================================
+             APP LOCKER
+        =============================================== -->
+
+        <section
+            id="lockerSection"
+            class="app-card"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        🔒 Ilovalarni bloklash
+                    </h2>
+
+                    <p>
+                        Ilovalar uchun PIN/parol himoyasi
+                    </p>
+
+                </div>
+
+                <span class="security-badge">
+                    🛡️ SECURITY
+                </span>
+
+            </div>
+
+
+            <!-- ADD APPLICATION -->
+
+            <div class="locker-form">
+
+                <input
+                    type="text"
+                    id="appNameInput"
+                    placeholder="Ilova nomi, masalan: Telegram"
+                    maxlength="30"
+                >
+
+                <input
+                    type="password"
+                    id="appPinInput"
+                    placeholder="PIN yoki parol"
+                    maxlength="30"
+                >
+
+                <button
+                    id="addAppBtn"
+                    class="primary-btn"
+                >
+                    ➕ Ilova qo‘shish
+                </button>
+
+            </div>
+
+
+            <!-- APPLICATION LIST -->
+
+            <div
+                id="appList"
+                class="app-list"
+            >
+
+                <div class="empty-apps">
+                    📱 Hozircha bloklangan ilovalar yo‘q
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================================
+             APP LOCK MODAL
+        =============================================== -->
+
+        <div
+            id="lockModal"
+            class="modal hidden"
+        >
+
+            <div class="modal-content">
+
+                <div class="lock-icon">
+                    🔒
+                </div>
+
+                <h2>
+                    Ilova bloklangan
+                </h2>
+
+                <p>
+                    <span id="lockedAppName">
+                        Ilova
+                    </span>
+                    uchun PIN/parolni kiriting.
+                </p>
+
+
+                <input
+                    type="password"
+                    id="unlockPinInput"
+                    placeholder="PIN yoki parol"
+                    autocomplete="off"
+                >
+
+
+                <div class="modal-actions">
+
+                    <button
+                        id="unlockAppBtn"
+                        class="primary-btn"
+                    >
+                        🔓 Ochish
+                    </button>
+
+                    <button
+                        id="closeModalBtn"
+                        class="secondary-btn"
+                    >
+                        Bekor qilish
+                    </button>
+
+                </div>
+
+
+                <p
+                    id="unlockMessage"
+                    class="unlock-message"
+                ></p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==============================================
+             NOTIFICATION
+        =============================================== -->
+
+        <div
+            id="notification"
+            class="notification"
+        >
+            <span id="notificationText">
+                Tayyor!
+            </span>
+        </div>
+
+    </main>
+
+
+    <!-- ==================================================
+         FOOTER
+    =================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-logo">
+            🔐 Password Generator
+        </div>
+
+        <p>
+            Kuchli parollar va xavfsiz ilovalar
+        </p>
+
+        <div class="footer-author">
+            👨‍💻 ULUG'BEK.R
+        </div>
+
+        <div class="footer-line"></div>
+
+        <small>
+            © 2026 ULUG'BEK.R — All Rights Reserved
+        </small>
+
+    </footer>
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+    =================================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
